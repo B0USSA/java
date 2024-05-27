@@ -93,23 +93,29 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        // Récupérer les valeurs des champs de texte
         String username = usernameInput.getText();
         String password = new String(passwordInput.getPassword());
         Users user = new Users();
 
-        // Vérifier si les champs ne sont pas vides
         if (username.isEmpty() || username.trim().isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter both username and password.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        boolean authentificated = user.login(username, password);
-        if (authentificated) {
-            JOptionPane.showMessageDialog(this, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        boolean authenticated = user.login(username, password);
+        if (authenticated) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    Client clientJFrame = new Client();
+                    clientJFrame.setVisible(true); 
+                    clientJFrame.ListerClients();
+                }
+            });
+            this.dispose();  
         } else {
             JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
