@@ -262,7 +262,7 @@ public class test extends javax.swing.JFrame {
     public void ListerClients() {
         try {
             ClientClass clientClass = new ClientClass();
-            ResultSet rs = clientClass.liste();
+            ResultSet rs = clientClass.liste("");
 
             // Récupérer le modèle de tableau existant
             DefaultTableModel model = (DefaultTableModel) clientTable.getModel();

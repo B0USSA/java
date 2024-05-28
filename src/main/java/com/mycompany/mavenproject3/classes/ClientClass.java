@@ -7,14 +7,14 @@ import java.sql.SQLException;
 
 public class ClientClass {
 
-    public ResultSet liste() {
+    public ResultSet liste(String searchTxt) {
         ResultSet resultSet = null;
         Connection conn = null;
         PreparedStatement statement = null;
 
         try {
             conn = DBConnect.getConnection();
-            String sql = "SELECT * FROM client ORDER BY id DESC";
+            String sql = "SELECT * FROM client WHERE nom like '%" + searchTxt + "%' or prenoms like '%" + searchTxt + "%' or num_compte like '%" + searchTxt + "%' ORDER BY id DESC";
             statement = conn.prepareStatement(sql);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
@@ -37,14 +37,15 @@ public class ClientClass {
         }
     }
 
-    public boolean updateClient(int clientId, String updatedNom, String updatedPrenoms, String updatedTel, String updatedMail) {
-        try (Connection conn = DBConnect.getConnection(); PreparedStatement statement = conn.prepareStatement("UPDATE client SET nom=?, prenoms=?, tel=?, mail=? WHERE id=?")) {
+    public boolean updateClient(int clientId, String updatedNom, String updatedPrenoms, String updatedTel, String updatedMail, int solde) {
+        try (Connection conn = DBConnect.getConnection(); PreparedStatement statement = conn.prepareStatement("UPDATE client SET nom=?, prenoms=?, tel=?, mail=? , solde=? WHERE id=?")) {
 
             statement.setString(1, updatedNom);
             statement.setString(2, updatedPrenoms);
             statement.setString(3, updatedTel);
             statement.setString(4, updatedMail);
-            statement.setInt(5, clientId);
+            statement.setInt(5, solde);
+            statement.setInt(6, clientId);
 
             int rowsAffected = statement.executeUpdate();
 
@@ -56,7 +57,7 @@ public class ClientClass {
     }
 
     public boolean addClient(String numCompte, String nom, String prenoms, String tel, String mail) {
-        try (Connection conn = DBConnect.getConnection(); PreparedStatement statement = conn.prepareStatement("INSERT INTO client (num_compte, nom, prenoms, tel, mail) VALUES (?, ?, ?, ?, ?)")) {
+        try (Connection conn = DBConnect.getConnection(); PreparedStatement statement = conn.prepareStatement("INSERT INTO client (num_compte, nom, prenoms, tel, mail, solde) VALUES (?, ?, ?, ?, ?, 0)")) {
             statement.setString(1, numCompte);
             statement.setString(2, nom);
             statement.setString(3, prenoms);

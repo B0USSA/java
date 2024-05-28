@@ -27,7 +27,9 @@ public class Client extends JFrame {
     private void initComponents() {
 
         deleteBtn = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        titleLabel = new javax.swing.JLabel();
         clientListeContainer = new javax.swing.JScrollPane();
         clientListe = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -44,6 +46,9 @@ public class Client extends JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
+        searchInput = new javax.swing.JTextField();
+        searchBtn = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         deleteBtn.setBackground(new java.awt.Color(242, 102, 102));
         deleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -54,9 +59,9 @@ public class Client extends JFrame {
         setMinimumSize(new java.awt.Dimension(1300, 590));
         setSize(new java.awt.Dimension(1300, 590));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Customers list");
+        titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(51, 51, 51));
+        titleLabel.setText("Liste des clients");
 
         clientListeContainer.setBorder(null);
 
@@ -65,7 +70,7 @@ public class Client extends JFrame {
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("Account number");
+        jLabel3.setText("Compte");
         jLabel3.setToolTipText("");
         jLabel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -78,7 +83,7 @@ public class Client extends JFrame {
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Name");
+        jLabel2.setText("Nom");
         jLabel2.setToolTipText("");
         jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -91,7 +96,7 @@ public class Client extends JFrame {
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel4.setText("Firstname");
+        jLabel4.setText("Prénoms");
         jLabel4.setToolTipText("");
         jLabel4.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -104,7 +109,7 @@ public class Client extends JFrame {
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel5.setText("Phone");
+        jLabel5.setText("Telephone");
         jLabel5.setToolTipText("");
         jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -139,7 +144,7 @@ public class Client extends JFrame {
         jLabel8.setPreferredSize(new java.awt.Dimension(0, 0));
         clientListe.add(jLabel8);
 
-        addBtn.setText("Add");
+        addBtn.setText("Ajouter");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addBtnActionPerformed(evt);
@@ -170,34 +175,67 @@ public class Client extends JFrame {
 
         clientListeContainer.setViewportView(clientListe);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        searchInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchInputActionPerformed(evt);
+            }
+        });
+
+        searchBtn.setText("Rechercher");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(clientListeContainer)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 1166, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel1)
+                .addComponent(titleLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 883, Short.MAX_VALUE)
+                .addComponent(searchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(clientListeContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                .addComponent(searchBtn)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(clientListeContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 1288, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(titleLabel)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(searchBtn)
+                        .addComponent(searchInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(466, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(46, 46, 46)
+                    .addComponent(clientListeContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jTabbedPane3.addTab("Clients", jPanel1);
+
+        getContentPane().add(jTabbedPane3, java.awt.BorderLayout.CENTER);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setText("Gestion de virement");
+        getContentPane().add(jLabel7, java.awt.BorderLayout.PAGE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        JFrame addFrame = new JFrame("Add a Client");
+        JDialog addFrame = new JDialog(this, "Ajouter un client", true);
 
         addFrame.setSize(400, 300);
         addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -213,19 +251,19 @@ public class Client extends JFrame {
         JTextField txtTel = new JTextField();
         JTextField txtMail = new JTextField();
 
-        String numCompte = generateRandomAccountNumber(8);
+        String numCompte = generateRandomAccountNumber(12);
 
-        panel.add(new JLabel("Account: " + numCompte));
-        panel.add(new JLabel("Name:"));
+        panel.add(new JLabel("Compte: " + numCompte));
+        panel.add(new JLabel("Nom:"));
         panel.add(txtNom);
-        panel.add(new JLabel("Firstname:"));
+        panel.add(new JLabel("Prénoms:"));
         panel.add(txtPrenoms);
-        panel.add(new JLabel("Phone:"));
+        panel.add(new JLabel("Téléphone:"));
         panel.add(txtTel);
         panel.add(new JLabel("Email:"));
         panel.add(txtMail);
 
-        JButton confirmAddBtn = new JButton("Add");
+        JButton confirmAddBtn = new JButton("Ajouter");
         confirmAddBtn.addActionListener(saveEvt -> {
             String updatedNom = txtNom.getText();
             String updatedPrenoms = txtPrenoms.getText();
@@ -234,20 +272,13 @@ public class Client extends JFrame {
 
             boolean addSuccess = clientClass.addClient(numCompte, updatedNom, updatedPrenoms, updatedTel, updatedMail);
             if (addSuccess) {
-                JOptionPane.showMessageDialog(addFrame, "Client added successfully!");
+                JOptionPane.showMessageDialog(addFrame, "Client ajouté avec succès");
 
                 addFrame.dispose();
 
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        Client clientJFrame = new Client();
-                        clientJFrame.setVisible(true);
-                        clientJFrame.ListerClients();
-                    }
-                });
-                this.dispose();
+                refresh();
             } else {
-                JOptionPane.showMessageDialog(addFrame, "Failed to add client.");
+                JOptionPane.showMessageDialog(addFrame, "Ajout du client échoué");
             }
         });
 
@@ -258,10 +289,19 @@ public class Client extends JFrame {
         addFrame.setVisible(true);
     }//GEN-LAST:event_addBtnActionPerformed
 
+    private void searchInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchInputActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        refresh();
+    }//GEN-LAST:event_searchBtnActionPerformed
+
     public void ListerClients() {
+        int nbClient = 0;
         try {
             ClientClass clientClass = new ClientClass();
-            ResultSet rs = clientClass.liste();
+            ResultSet rs = clientClass.liste(searchInput.getText());
 
             while (rs.next()) {
                 String numCompte = rs.getString("num_compte");
@@ -270,6 +310,7 @@ public class Client extends JFrame {
                 String tel = rs.getString("tel");
                 String mail = rs.getString("mail");
                 int clientId = rs.getInt("id");
+                int solde = rs.getInt("solde");
 
                 JLabel lblNumCompte = new JLabel(numCompte);
                 JLabel lblNom = new JLabel(nom);
@@ -277,11 +318,11 @@ public class Client extends JFrame {
                 JLabel lblTel = new JLabel(tel);
                 JLabel lblMail = new JLabel(mail);
 
-                JButton btnDelete = new JButton("Delete");
-                JButton btnUpdate = new JButton("Modify");
+                JButton btnDelete = new JButton("Supprimer");
+                JButton btnUpdate = new JButton("Modifier");
 
                 btnDelete.addActionListener(evt -> {
-                    int response = JOptionPane.showConfirmDialog(null, "Do you really want to delete this customer?", "Delete", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    int response = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment supprimer ce client?", "Suppression", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if (response == JOptionPane.YES_OPTION) {
                         boolean success = clientClass.deleteById(clientId);
                         if (success) {
@@ -296,13 +337,14 @@ public class Client extends JFrame {
                             clientListe.revalidate();
                             clientListe.repaint();
                         } else {
-                            JOptionPane.showMessageDialog(null, "Couldn't delete customer");
+                            JOptionPane.showMessageDialog(null, "Suppresion du client échoué");
                         }
                     }
                 });
 
                 btnUpdate.addActionListener(evt -> {
-                    JFrame updateFrame = new JFrame("Update Client");
+                    JDialog updateFrame = new JDialog(this, "Modification", true);
+
                     updateFrame.setSize(400, 300);
                     updateFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -314,39 +356,44 @@ public class Client extends JFrame {
                     JTextField txtPrenoms = new JTextField(prenoms);
                     JTextField txtTel = new JTextField(tel);
                     JTextField txtMail = new JTextField(mail);
+                    JTextField txtSolde = new JTextField(solde + "");
 
-                    panel.add(new JLabel("Accunt:" + numCompte));
-                    panel.add(new JLabel("Name:"));
+                    panel.add(new JLabel("Compte: " + numCompte));
+                    panel.add(new JLabel("Nom:"));
                     panel.add(txtNom);
-                    panel.add(new JLabel("Firstname:"));
+                    panel.add(new JLabel("Prénoms:"));
                     panel.add(txtPrenoms);
-                    panel.add(new JLabel("Phone:"));
+                    panel.add(new JLabel("Téléphone:"));
                     panel.add(txtTel);
                     panel.add(new JLabel("Email:"));
                     panel.add(txtMail);
+                    panel.add(new JLabel("Solde:"));
+                    panel.add(txtSolde);
 
-                    JButton btnSave = new JButton("Save");
+                    JButton btnSave = new JButton("Enregister");
                     btnSave.addActionListener(saveEvt -> {
                         String updatedNom = txtNom.getText();
                         String updatedPrenoms = txtPrenoms.getText();
                         String updatedTel = txtTel.getText();
                         String updatedMail = txtMail.getText();
+                        int updatedSolde;
 
-                        boolean updateSuccess = clientClass.updateClient(clientId, updatedNom, updatedPrenoms, updatedTel, updatedMail);
+                        try {
+                            updatedSolde = Integer.parseInt(txtSolde.getText());
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Veuillez entrer un solde valide");
+                            return;
+                        }
+
+                        boolean updateSuccess = clientClass.updateClient(clientId, updatedNom, updatedPrenoms, updatedTel, updatedMail, updatedSolde);
                         if (updateSuccess) {
-                            JOptionPane.showMessageDialog(updateFrame, "Client details updated successfully!");
-
-                            lblNom.setText(updatedNom);
-                            lblPrenoms.setText(updatedPrenoms);
-                            lblTel.setText(updatedTel);
-                            lblMail.setText(updatedMail);
-
-                            clientListe.revalidate();
-                            clientListe.repaint();
+                            JOptionPane.showMessageDialog(updateFrame, "Client modifié avec succès");
 
                             updateFrame.dispose();
+
+                            refresh();
                         } else {
-                            JOptionPane.showMessageDialog(updateFrame, "Failed to update client details.");
+                            JOptionPane.showMessageDialog(updateFrame, "Modification échoué");
                         }
                     });
 
@@ -364,14 +411,23 @@ public class Client extends JFrame {
                 clientListe.add(lblMail);
                 clientListe.add(btnDelete);
                 clientListe.add(btnUpdate);
+
+                nbClient++;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        while (nbClient < 23) {
+            for (int i = 0; i < 7; i++) {
+                clientListe.add(new JLabel());
+            }
+            nbClient++;
+        }
     }
 
     private String generateRandomAccountNumber(int length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        String characters = "0123456789";
         Random random = new Random();
         StringBuilder accountNumber = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
@@ -380,18 +436,34 @@ public class Client extends JFrame {
         return accountNumber.toString();
     }
 
+    private void refresh() {
+        int notRemove = 14;
+        int componentCount = clientListe.getComponentCount();
+
+        for (int i = componentCount - 1; i >= notRemove; i--) {
+            clientListe.remove(i);
+        }
+
+        clientListe.revalidate();
+        clientListe.repaint();
+
+        ListerClients();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
     private javax.swing.JPanel clientListe;
     private javax.swing.JScrollPane clientListeContainer;
     private javax.swing.JButton deleteBtn;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -399,5 +471,10 @@ public class Client extends JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JButton searchBtn;
+    private javax.swing.JTextField searchInput;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
