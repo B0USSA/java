@@ -1,9 +1,11 @@
 package com.mycompany.mavenproject3.classes;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
 
 public class ClientClass {
 
@@ -22,6 +24,27 @@ public class ClientClass {
         }
 
         return resultSet;
+    }
+
+    public String nomPrenoms(String numCompte) {
+        ResultSet resultSet = null;
+        Connection conn = null;
+        PreparedStatement statement = null;
+        String client = "";
+
+        try {
+            conn = DBConnect.getConnection();
+            String sql = "SELECT * FROM client WHERE num_compte = ?";
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, numCompte);
+            resultSet = statement.executeQuery();
+            resultSet.next();
+            client = resultSet.getString("nom") + " " + resultSet.getString("prenoms");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return client;
     }
 
     public boolean deleteById(int id) {
@@ -71,5 +94,50 @@ public class ClientClass {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean faireUnPret(String numCompte, int solde, int montant, String numPret) {
+        try (Connection conn = DBConnect.getConnection()) {
+            try (PreparedStatement updateSoldeStmt = conn.prepareStatement("UPDATE client SET solde=? WHERE num_compte=?")) {
+                updateSoldeStmt.setInt(1, solde);
+                updateSoldeStmt.setString(2, numCompte);
+
+                int rowsAffected = updateSoldeStmt.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    Date dateAujourdhui = new java.sql.Date(System.currentTimeMillis());
+
+                    try (PreparedStatement insererPreterStmt = conn.prepareStatement("INSERT INTO preter(num_pret, num_compte, montant_prete, datepret) VALUES (?,?,?,?)")) {
+                        insererPreterStmt.setString(1, numPret);
+                        insererPreterStmt.setString(2, numCompte);
+                        insererPreterStmt.setInt(3, montant);
+                        insererPreterStmt.setDate(4, dateAujourdhui);
+
+                        rowsAffected = insererPreterStmt.executeUpdate();
+                        return rowsAffected > 0;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean pretEnCours(String numCompte) {
+        try (Connection conn = DBConnect.getConnection(); PreparedStatement checkPretStmt = conn.prepareStatement("SELECT COUNT(*) AS count FROM preter WHERE num_compte = ?")) {
+
+            checkPretStmt.setString(1, numCompte);
+
+            try (ResultSet result = checkPretStmt.executeQuery()) {
+                if (result.next()) {
+                    int nbPret = result.getInt("count");
+                    return nbPret > 0;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
