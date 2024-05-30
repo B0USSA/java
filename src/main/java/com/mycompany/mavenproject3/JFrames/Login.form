@@ -68,6 +68,9 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="usernameInput">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="usernameInputActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="passwordInput">
     </Component>

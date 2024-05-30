@@ -47,6 +47,27 @@ public class ClientClass {
         return client;
     }
 
+    public int solde(String numCompte) {
+        ResultSet resultSet = null;
+        Connection conn = null;
+        PreparedStatement statement = null;
+        int montant = 0;
+
+        try {
+            conn = DBConnect.getConnection();
+            String sql = "SELECT * FROM client WHERE num_compte = ?";
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, numCompte);
+            resultSet = statement.executeQuery();
+            resultSet.next();
+            montant = resultSet.getInt("solde");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return montant;
+    }
+
     public boolean deleteById(int id) {
         try (Connection conn = DBConnect.getConnection(); PreparedStatement statement = conn.prepareStatement("DELETE FROM client WHERE id = ?")) {
 
@@ -96,7 +117,7 @@ public class ClientClass {
         }
     }
 
-    public boolean faireUnPret(String numCompte, int solde, int montant, String numPret) {
+    public boolean faireUnPret(String numCompte, int solde, int montant, String numPret, String numRendu, int reste) {
         try (Connection conn = DBConnect.getConnection()) {
             try (PreparedStatement updateSoldeStmt = conn.prepareStatement("UPDATE client SET solde=? WHERE num_compte=?")) {
                 updateSoldeStmt.setInt(1, solde);
@@ -114,7 +135,16 @@ public class ClientClass {
                         insererPreterStmt.setDate(4, dateAujourdhui);
 
                         rowsAffected = insererPreterStmt.executeUpdate();
-                        return rowsAffected > 0;
+                        if (rowsAffected > 0) {
+                            PreparedStatement insererRendreStmt = conn.prepareStatement("INSERT INTO rendre(num_rendu, num_pret, situation, rest_paye, date_rendu) VALUES (?,?,'Non payé',?,?)");
+                            insererRendreStmt.setString(1, numRendu);
+                            insererRendreStmt.setString(2, numPret);
+                            insererRendreStmt.setInt(3, reste);
+                            insererRendreStmt.setDate(4, dateAujourdhui);
+
+                            rowsAffected = insererRendreStmt.executeUpdate();
+                            return rowsAffected > 0;
+                        }
                     }
                 }
             }
@@ -125,14 +155,26 @@ public class ClientClass {
     }
 
     public boolean pretEnCours(String numCompte) {
-        try (Connection conn = DBConnect.getConnection(); PreparedStatement checkPretStmt = conn.prepareStatement("SELECT COUNT(*) AS count FROM preter WHERE num_compte = ?")) {
+        String checkPretQuery = "SELECT COUNT(*) AS count FROM preter WHERE num_compte = ?";
+        String checkRendreQuery = "SELECT situation FROM rendre WHERE num_pret IN (SELECT num_pret FROM preter WHERE num_compte = ?)";
+
+        try (Connection conn = DBConnect.getConnection(); PreparedStatement checkPretStmt = conn.prepareStatement(checkPretQuery)) {
 
             checkPretStmt.setString(1, numCompte);
 
             try (ResultSet result = checkPretStmt.executeQuery()) {
-                if (result.next()) {
-                    int nbPret = result.getInt("count");
-                    return nbPret > 0;
+                if (result.next() && result.getInt("count") > 0) {
+                    try (PreparedStatement checkRendreStmt = conn.prepareStatement(checkRendreQuery)) {
+                        checkRendreStmt.setString(1, numCompte);
+                        try (ResultSet resultRendre = checkRendreStmt.executeQuery()) {
+                            while (resultRendre.next()) {
+                                String situation = resultRendre.getString("situation");
+                                if (!"Tout payé".equals(situation)) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         } catch (SQLException e) {
@@ -140,4 +182,5 @@ public class ClientClass {
         }
         return false;
     }
+
 }

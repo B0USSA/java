@@ -18,6 +18,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import com.mycompany.mavenproject3.classes.ClientClass;
 import com.mycompany.mavenproject3.classes.PretClass;
+import com.mycompany.mavenproject3.classes.RendreClass;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,6 +39,7 @@ public class Client extends JFrame {
     private void initComponents() {
 
         deleteBtn = new javax.swing.JButton();
+        jLabel30 = new javax.swing.JLabel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
@@ -71,6 +73,10 @@ public class Client extends JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jSeparator30 = new javax.swing.JSeparator();
+        jSeparator29 = new javax.swing.JSeparator();
         jSeparator16 = new javax.swing.JSeparator();
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator11 = new javax.swing.JSeparator();
@@ -78,7 +84,26 @@ public class Client extends JFrame {
         jSeparator13 = new javax.swing.JSeparator();
         jSeparator14 = new javax.swing.JSeparator();
         filter = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        beneficeLbl = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        titleLabel3 = new javax.swing.JLabel();
+        clientListeContainer3 = new javax.swing.JScrollPane();
+        pretListe2 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jSeparator23 = new javax.swing.JSeparator();
+        jSeparator24 = new javax.swing.JSeparator();
+        jSeparator25 = new javax.swing.JSeparator();
+        jSeparator26 = new javax.swing.JSeparator();
+        jSeparator27 = new javax.swing.JSeparator();
+        jSeparator28 = new javax.swing.JSeparator();
+        filter2 = new javax.swing.JComboBox<>();
 
         deleteBtn.setBackground(new java.awt.Color(242, 102, 102));
         deleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -88,7 +113,10 @@ public class Client extends JFrame {
         setBackground(new java.awt.Color(228, 228, 228));
         setMinimumSize(new java.awt.Dimension(1300, 590));
         setSize(new java.awt.Dimension(1300, 590));
-        getContentPane().setLayout(new java.awt.BorderLayout(5, 5));
+
+        jLabel30.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel30.setText("Gestion de virements et de prêts bancaires");
+        getContentPane().add(jLabel30, java.awt.BorderLayout.PAGE_START);
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(51, 51, 51));
@@ -241,15 +269,15 @@ public class Client extends JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 334, Short.MAX_VALUE)
-                .addComponent(searchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 563, Short.MAX_VALUE)
+                .addComponent(searchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchBtn)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(clientListeContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
+                    .addComponent(clientListeContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
@@ -261,11 +289,11 @@ public class Client extends JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(searchBtn)
                         .addComponent(searchInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(46, 46, 46)
-                    .addComponent(clientListeContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                    .addComponent(clientListeContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -277,7 +305,7 @@ public class Client extends JFrame {
 
         clientListeContainer1.setBorder(null);
 
-        pretListe.setLayout(new java.awt.GridLayout(0, 6, 2, 2));
+        pretListe.setLayout(new java.awt.GridLayout(0, 8, 2, 2));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -357,6 +385,37 @@ public class Client extends JFrame {
         jLabel14.setPreferredSize(new java.awt.Dimension(0, 0));
         pretListe.add(jLabel14);
 
+        jLabel29.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel29.setText("Situation");
+        jLabel29.setToolTipText("");
+        jLabel29.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
+        jLabel29.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel29.setInheritsPopupMenu(false);
+        jLabel29.setMaximumSize(new java.awt.Dimension(999999, 40));
+        jLabel29.setMinimumSize(new java.awt.Dimension(0, 40));
+        jLabel29.setPreferredSize(new java.awt.Dimension(0, 0));
+        pretListe.add(jLabel29);
+
+        jLabel28.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel28.setToolTipText("");
+        jLabel28.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
+        jLabel28.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel28.setInheritsPopupMenu(false);
+        jLabel28.setMaximumSize(new java.awt.Dimension(999999, 40));
+        jLabel28.setMinimumSize(new java.awt.Dimension(0, 40));
+        jLabel28.setPreferredSize(new java.awt.Dimension(0, 0));
+        pretListe.add(jLabel28);
+
+        jSeparator30.setForeground(new java.awt.Color(102, 102, 102));
+        pretListe.add(jSeparator30);
+
+        jSeparator29.setForeground(new java.awt.Color(102, 102, 102));
+        pretListe.add(jSeparator29);
+
         jSeparator16.setForeground(new java.awt.Color(102, 102, 102));
         pretListe.add(jSeparator16);
 
@@ -377,12 +436,16 @@ public class Client extends JFrame {
 
         clientListeContainer1.setViewportView(pretListe);
 
-        filter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tout", "Non payé", "Payé une part", "Tout payé" }));
+        filter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tout", "Non payé", "En partie payé", "Tout payé" }));
         filter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filterActionPerformed(evt);
             }
         });
+
+        jButton1.setText("Rechercher");
+
+        beneficeLbl.setText("Bénéfice:");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -391,13 +454,19 @@ public class Client extends JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 477, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
+                .addComponent(beneficeLbl)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filter, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(clientListeContainer1, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
+                    .addComponent(clientListeContainer1, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel4Layout.setVerticalGroup(
@@ -406,22 +475,167 @@ public class Client extends JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(titleLabel1)
-                    .addComponent(filter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(122, Short.MAX_VALUE))
+                    .addComponent(filter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(beneficeLbl))
+                .addContainerGap(126, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(46, 46, 46)
-                    .addComponent(clientListeContainer1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                    .addComponent(clientListeContainer1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
         jTabbedPane3.addTab("Prêts", jPanel4);
 
-        getContentPane().add(jTabbedPane3, java.awt.BorderLayout.CENTER);
+        titleLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        titleLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        titleLabel3.setText("Liste des virements");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setText("Gestion de virements et de prêts bancaires");
-        getContentPane().add(jLabel7, java.awt.BorderLayout.PAGE_START);
+        clientListeContainer3.setBorder(null);
+
+        pretListe2.setLayout(new java.awt.GridLayout(0, 6, 2, 2));
+
+        jLabel22.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel22.setText("N° prêt");
+        jLabel22.setToolTipText("");
+        jLabel22.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
+        jLabel22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel22.setInheritsPopupMenu(false);
+        jLabel22.setMaximumSize(new java.awt.Dimension(999999, 40));
+        jLabel22.setMinimumSize(new java.awt.Dimension(0, 40));
+        jLabel22.setPreferredSize(new java.awt.Dimension(0, 0));
+        pretListe2.add(jLabel22);
+
+        jLabel23.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel23.setText("Compte");
+        jLabel23.setToolTipText("");
+        jLabel23.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
+        jLabel23.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel23.setInheritsPopupMenu(false);
+        jLabel23.setMaximumSize(new java.awt.Dimension(999999, 40));
+        jLabel23.setMinimumSize(new java.awt.Dimension(0, 40));
+        jLabel23.setPreferredSize(new java.awt.Dimension(0, 0));
+        pretListe2.add(jLabel23);
+
+        jLabel24.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel24.setText("Client");
+        jLabel24.setToolTipText("");
+        jLabel24.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
+        jLabel24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel24.setInheritsPopupMenu(false);
+        jLabel24.setMaximumSize(new java.awt.Dimension(999999, 40));
+        jLabel24.setMinimumSize(new java.awt.Dimension(0, 40));
+        jLabel24.setPreferredSize(new java.awt.Dimension(0, 0));
+        pretListe2.add(jLabel24);
+
+        jLabel25.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel25.setText("Montant");
+        jLabel25.setToolTipText("");
+        jLabel25.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
+        jLabel25.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel25.setInheritsPopupMenu(false);
+        jLabel25.setMaximumSize(new java.awt.Dimension(999999, 40));
+        jLabel25.setMinimumSize(new java.awt.Dimension(0, 40));
+        jLabel25.setPreferredSize(new java.awt.Dimension(0, 0));
+        pretListe2.add(jLabel25);
+
+        jLabel26.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel26.setText("Date");
+        jLabel26.setToolTipText("");
+        jLabel26.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
+        jLabel26.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel26.setInheritsPopupMenu(false);
+        jLabel26.setMaximumSize(new java.awt.Dimension(999999, 40));
+        jLabel26.setMinimumSize(new java.awt.Dimension(0, 40));
+        jLabel26.setPreferredSize(new java.awt.Dimension(0, 0));
+        pretListe2.add(jLabel26);
+
+        jLabel27.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel27.setText("Jours restants");
+        jLabel27.setToolTipText("");
+        jLabel27.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
+        jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel27.setInheritsPopupMenu(false);
+        jLabel27.setMaximumSize(new java.awt.Dimension(999999, 40));
+        jLabel27.setMinimumSize(new java.awt.Dimension(0, 40));
+        jLabel27.setPreferredSize(new java.awt.Dimension(0, 0));
+        pretListe2.add(jLabel27);
+
+        jSeparator23.setForeground(new java.awt.Color(102, 102, 102));
+        pretListe2.add(jSeparator23);
+
+        jSeparator24.setForeground(new java.awt.Color(102, 102, 102));
+        pretListe2.add(jSeparator24);
+
+        jSeparator25.setForeground(new java.awt.Color(102, 102, 102));
+        pretListe2.add(jSeparator25);
+
+        jSeparator26.setForeground(new java.awt.Color(102, 102, 102));
+        pretListe2.add(jSeparator26);
+
+        jSeparator27.setForeground(new java.awt.Color(102, 102, 102));
+        pretListe2.add(jSeparator27);
+
+        jSeparator28.setForeground(new java.awt.Color(102, 102, 102));
+        pretListe2.add(jSeparator28);
+
+        clientListeContainer3.setViewportView(pretListe2);
+
+        filter2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tout", "Non payé", "Payé une part", "Tout payé" }));
+        filter2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filter2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titleLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 661, Short.MAX_VALUE)
+                .addComponent(filter2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(clientListeContainer3, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(titleLabel3)
+                    .addComponent(filter2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(127, Short.MAX_VALUE))
+            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGap(46, 46, 46)
+                    .addComponent(clientListeContainer3, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jTabbedPane3.addTab("Virement", jPanel6);
+
+        getContentPane().add(jTabbedPane3, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -492,6 +706,10 @@ public class Client extends JFrame {
     private void filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterActionPerformed
         refresh();
     }//GEN-LAST:event_filterActionPerformed
+
+    private void filter2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filter2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_filter2ActionPerformed
 
     public void ListerClients() {
         int nbClient = 0;
@@ -670,10 +888,12 @@ public class Client extends JFrame {
                         btnSave.addActionListener(saveEvt -> {
                             int nouveauSolde;
                             int montant;
+                            int reste;
 
                             try {
                                 nouveauSolde = Integer.parseInt(txtSolde.getText());
                                 montant = Integer.parseInt(txtMontant.getText());
+                                reste = Integer.parseInt(txtARendre.getText());
                             } catch (NumberFormatException e) {
                                 JOptionPane.showMessageDialog(null, "Veuillez entrer un montant valide");
                                 return;
@@ -684,7 +904,7 @@ public class Client extends JFrame {
                                 return;
                             }
 
-                            boolean updateSuccess = clientClass.faireUnPret(numCompte, nouveauSolde, montant, numPret);
+                            boolean updateSuccess = clientClass.faireUnPret(numCompte, nouveauSolde, montant, numPret, generateRandomNumber(12), reste);
                             if (updateSuccess) {
                                 JOptionPane.showMessageDialog(loanFrame, "Prêt effectué avec succès");
 
@@ -733,14 +953,25 @@ public class Client extends JFrame {
         try {
             PretClass pretClass = new PretClass();
             ClientClass clientClass = new ClientClass();
+            RendreClass rendreClass = new RendreClass();
+
+            beneficeLbl.setText("Bénéfice: " + pretClass.Benefice() + " Ar");
+
             ResultSet rs;
-            if (filter.getSelectedIndex() == 0) {
-                rs = pretClass.liste("tout");
-            } else if (filter.getSelectedIndex() == 1) {
-                rs = pretClass.liste("tout paye");
-            } else {
-                rs = pretClass.liste("paye part");
-            }
+
+            String situation;
+            situation = switch (filter.getSelectedIndex()) {
+                case 0 ->
+                    "Tout";
+                case 1 ->
+                    "Non payé";
+                case 2 ->
+                    "En partie payé";
+                default ->
+                    "Tout payé";
+            };
+
+            rs = pretClass.liste(situation, jTextField1.getText());
 
             Date dateAujourdui = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -749,8 +980,11 @@ public class Client extends JFrame {
                 String numPret = rs.getString("num_pret");
                 String numCompte = rs.getString("num_compte");
                 String client = clientClass.nomPrenoms(numCompte);
-                String montant = rs.getString("montant_prete");
+                int montant = rs.getInt("montant_prete");
                 String datePretStr = rs.getString("datepret");
+                String situationStr = rs.getString("situation");
+                String numRendu = rs.getString("num_rendu");
+                int aRendre = rs.getInt("rest_paye");
 
                 Date datePret = dateFormat.parse(datePretStr);
                 long diffInMillies = Math.abs(dateAujourdui.getTime() - datePret.getTime());
@@ -762,7 +996,112 @@ public class Client extends JFrame {
                 JLabel lblClient = new JLabel(client);
                 JLabel lblMontant = new JLabel(montant + " Ar");
                 JLabel lblDatePret = new JLabel(datePretStr);
-                JLabel lblJoursRestants = new JLabel(joursRestants + " jours restants");
+                JLabel lblJoursRestants = new JLabel(joursRestants + " jours");
+                JLabel lblSituation = new JLabel(situationStr);
+                JLabel lblDatePaye = new JLabel();
+                JButton rendreBtn = new JButton("Rembourser");
+
+                // <editor-fold defaultstate="collapsed" desc="rendreBtn action">                          
+                rendreBtn.addActionListener(evt -> {
+                    JDialog rendreFrame = new JDialog(this, "Remboursement", true);
+
+                    rendreFrame.setSize(400, 300);
+                    rendreFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                    JPanel panel = new JPanel();
+                    panel.setLayout(new GridLayout(0, 1));
+                    panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+                    int solde = clientClass.solde(numCompte);
+
+                    JTextField txtSolde = new JTextField(solde + "");
+                    JTextField txtMontant = new JTextField("0");
+                    JTextField txtARendre = new JTextField(aRendre + "");
+
+                    txtSolde.setEditable(false);
+                    txtARendre.setEditable(false);
+
+                    txtMontant.getDocument().addDocumentListener(new DocumentListener() {
+                        public void changedUpdate(DocumentEvent e) {
+                            updateValues();
+                        }
+
+                        public void removeUpdate(DocumentEvent e) {
+                            updateValues();
+                        }
+
+                        public void insertUpdate(DocumentEvent e) {
+                            updateValues();
+                        }
+
+                        private void updateValues() {
+                            try {
+                                int montant = Integer.parseInt(txtMontant.getText());
+                                int montantARendre = aRendre - montant;
+                                int nouveauSolde = solde - montant;
+
+                                txtSolde.setText(String.valueOf(nouveauSolde));
+                                txtARendre.setText(String.valueOf(montantARendre));
+                            } catch (NumberFormatException e) {
+                                txtSolde.setText(String.valueOf(solde));
+                                txtARendre.setText(aRendre + "");
+                            }
+                        }
+                    });
+
+                    panel.add(new JLabel("Compte: " + numCompte));
+                    panel.add(new JLabel("Nom du client: " + client));
+                    panel.add(new JLabel("Prêt N° " + numPret));
+                    panel.add(new JLabel("Solde après remboursement (Ar):"));
+                    panel.add(txtSolde);
+                    panel.add(new JLabel("Montant à rembourser (Ar):"));
+                    panel.add(txtMontant);
+                    panel.add(new JLabel("Reste à rembourser (Ar):"));
+                    panel.add(txtARendre);
+
+                    JButton btnSave = new JButton("Effectuer le remboursement");
+                    btnSave.addActionListener(saveEvt -> {
+                        int nouveauSolde;
+                        int montantRendu;
+                        int resteAPayer;
+
+                        try {
+                            nouveauSolde = Integer.parseInt(txtSolde.getText());
+                            montantRendu = Integer.parseInt(txtMontant.getText());
+                            resteAPayer = Integer.parseInt(txtARendre.getText());
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(null, "Veuillez entrer un montant valide");
+                            return;
+                        }
+
+                        if (montantRendu == 0) {
+                            JOptionPane.showMessageDialog(null, "Veuillez entrer un montant supérieur à 0 Ar");
+                            return;
+                        }
+
+                        if (montantRendu > solde) {
+                            JOptionPane.showMessageDialog(null, "Votre solde est insuffisant pour rembourser ce montant");
+                            return;
+                        }
+
+                        boolean updateSuccess = rendreClass.rembourser(numCompte, nouveauSolde, montantRendu, numPret, montantRendu >= aRendre, numRendu, resteAPayer);
+                        if (updateSuccess) {
+                            JOptionPane.showMessageDialog(rendreFrame, "Remboursement effectué avec succès");
+
+                            rendreFrame.dispose();
+
+                            refresh();
+                        } else {
+                            JOptionPane.showMessageDialog(rendreFrame, "Remboursement échoué");
+                        }
+                    });
+
+                    panel.add(new JLabel());
+                    panel.add(btnSave);
+
+                    rendreFrame.add(panel);
+                    rendreFrame.setVisible(true);
+                });// </editor-fold> 
 
                 pretListe.add(lblNumPret);
                 pretListe.add(lblNumCompte);
@@ -770,6 +1109,15 @@ public class Client extends JFrame {
                 pretListe.add(lblMontant);
                 pretListe.add(lblDatePret);
                 pretListe.add(lblJoursRestants);
+                pretListe.add(lblSituation);
+
+                if (aRendre <= 0) {
+                    pretListe.add(lblDatePaye);
+                    lblJoursRestants.setText("-");
+                    lblDatePaye.setText("Payé le " + rs.getString("date_rendu"));
+                } else {
+                    pretListe.add(rendreBtn);
+                }
 
                 nbPret++;
             }
@@ -779,7 +1127,7 @@ public class Client extends JFrame {
         }
 
         while (nbPret < 22) {
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 8; i++) {
                 pretListe.add(new JLabel());
             }
             nbPret++;
@@ -812,7 +1160,6 @@ public class Client extends JFrame {
 
         ListerClients();
 
-        notRemove = 12;
         componentCount = pretListe.getComponentCount();
 
         for (int i = componentCount - 1; i >= notRemove; i--) {
@@ -827,11 +1174,15 @@ public class Client extends JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
+    private javax.swing.JLabel beneficeLbl;
     private javax.swing.JPanel clientListe;
     private javax.swing.JScrollPane clientListeContainer;
     private javax.swing.JScrollPane clientListeContainer1;
+    private javax.swing.JScrollPane clientListeContainer3;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JComboBox<String> filter;
+    private javax.swing.JComboBox<String> filter2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -839,15 +1190,24 @@ public class Client extends JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
@@ -857,16 +1217,27 @@ public class Client extends JFrame {
     private javax.swing.JSeparator jSeparator15;
     private javax.swing.JSeparator jSeparator16;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator23;
+    private javax.swing.JSeparator jSeparator24;
+    private javax.swing.JSeparator jSeparator25;
+    private javax.swing.JSeparator jSeparator26;
+    private javax.swing.JSeparator jSeparator27;
+    private javax.swing.JSeparator jSeparator28;
+    private javax.swing.JSeparator jSeparator29;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator30;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel pretListe;
+    private javax.swing.JPanel pretListe2;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchInput;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel titleLabel1;
+    private javax.swing.JLabel titleLabel3;
     // End of variables declaration//GEN-END:variables
 }

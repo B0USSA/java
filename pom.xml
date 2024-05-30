@@ -19,7 +19,6 @@
         <exec.mainClass>com.mycompany.mavenproject3.Mavenproject3</exec.mainClass>
     </properties>
     <dependencies>
-        <!-- Autres dépendances existantes -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
