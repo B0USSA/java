@@ -114,8 +114,7 @@ public class Login extends javax.swing.JFrame {
                 public void run() {
                     Client clientJFrame = new Client();
                     clientJFrame.setVisible(true); 
-                    clientJFrame.ListerClients();
-                    clientJFrame.ListerPrets();
+                    clientJFrame.refresh();
                 }
             });
             this.dispose();  

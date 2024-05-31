@@ -11,8 +11,8 @@ public class ClientClass {
 
     public ResultSet liste(String searchTxt) {
         ResultSet resultSet = null;
-        Connection conn = null;
-        PreparedStatement statement = null;
+        Connection conn;
+        PreparedStatement statement;
 
         try {
             conn = DBConnect.getConnection();
@@ -24,6 +24,30 @@ public class ClientClass {
         }
 
         return resultSet;
+    }
+
+    public boolean accountExist(String numCompte) {
+        ResultSet resultSet = null;
+        Connection conn;
+        PreparedStatement statement;
+
+        try {
+            conn = DBConnect.getConnection();
+            String sql = "SELECT COUNT(*) AS count FROM client WHERE num_compte = '" + numCompte + "'";
+            statement = conn.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int nbCount = resultSet.getInt("count");
+                if(nbCount == 0){
+                    return false;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return true;
     }
 
     public String nomPrenoms(String numCompte) {

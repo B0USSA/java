@@ -4,8 +4,6 @@
  */
 package com.mycompany.mavenproject3.JFrames;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -19,6 +17,7 @@ import javax.swing.event.DocumentListener;
 import com.mycompany.mavenproject3.classes.ClientClass;
 import com.mycompany.mavenproject3.classes.PretClass;
 import com.mycompany.mavenproject3.classes.RendreClass;
+import com.mycompany.mavenproject3.classes.VirementClass;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -90,20 +89,16 @@ public class Client extends JFrame {
         jPanel6 = new javax.swing.JPanel();
         titleLabel3 = new javax.swing.JLabel();
         clientListeContainer3 = new javax.swing.JScrollPane();
-        pretListe2 = new javax.swing.JPanel();
+        virementListe = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
         jSeparator23 = new javax.swing.JSeparator();
         jSeparator24 = new javax.swing.JSeparator();
         jSeparator25 = new javax.swing.JSeparator();
         jSeparator26 = new javax.swing.JSeparator();
-        jSeparator27 = new javax.swing.JSeparator();
-        jSeparator28 = new javax.swing.JSeparator();
-        filter2 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
 
         deleteBtn.setBackground(new java.awt.Color(242, 102, 102));
         deleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -495,12 +490,12 @@ public class Client extends JFrame {
 
         clientListeContainer3.setBorder(null);
 
-        pretListe2.setLayout(new java.awt.GridLayout(0, 6, 2, 2));
+        virementListe.setLayout(new java.awt.GridLayout(0, 4, 2, 2));
 
         jLabel22.setBackground(new java.awt.Color(255, 255, 255));
         jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel22.setText("N° prêt");
+        jLabel22.setText("Envoyeur");
         jLabel22.setToolTipText("");
         jLabel22.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
         jLabel22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -508,12 +503,12 @@ public class Client extends JFrame {
         jLabel22.setMaximumSize(new java.awt.Dimension(999999, 40));
         jLabel22.setMinimumSize(new java.awt.Dimension(0, 40));
         jLabel22.setPreferredSize(new java.awt.Dimension(0, 0));
-        pretListe2.add(jLabel22);
+        virementListe.add(jLabel22);
 
         jLabel23.setBackground(new java.awt.Color(255, 255, 255));
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel23.setText("Compte");
+        jLabel23.setText("Bénéficiaire");
         jLabel23.setToolTipText("");
         jLabel23.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
         jLabel23.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -521,12 +516,12 @@ public class Client extends JFrame {
         jLabel23.setMaximumSize(new java.awt.Dimension(999999, 40));
         jLabel23.setMinimumSize(new java.awt.Dimension(0, 40));
         jLabel23.setPreferredSize(new java.awt.Dimension(0, 0));
-        pretListe2.add(jLabel23);
+        virementListe.add(jLabel23);
 
         jLabel24.setBackground(new java.awt.Color(255, 255, 255));
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel24.setText("Client");
+        jLabel24.setText("Montant");
         jLabel24.setToolTipText("");
         jLabel24.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
         jLabel24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -534,12 +529,12 @@ public class Client extends JFrame {
         jLabel24.setMaximumSize(new java.awt.Dimension(999999, 40));
         jLabel24.setMinimumSize(new java.awt.Dimension(0, 40));
         jLabel24.setPreferredSize(new java.awt.Dimension(0, 0));
-        pretListe2.add(jLabel24);
+        virementListe.add(jLabel24);
 
         jLabel25.setBackground(new java.awt.Color(255, 255, 255));
         jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel25.setText("Montant");
+        jLabel25.setText("Date de transfert");
         jLabel25.setToolTipText("");
         jLabel25.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
         jLabel25.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -547,58 +542,26 @@ public class Client extends JFrame {
         jLabel25.setMaximumSize(new java.awt.Dimension(999999, 40));
         jLabel25.setMinimumSize(new java.awt.Dimension(0, 40));
         jLabel25.setPreferredSize(new java.awt.Dimension(0, 0));
-        pretListe2.add(jLabel25);
-
-        jLabel26.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel26.setText("Date");
-        jLabel26.setToolTipText("");
-        jLabel26.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
-        jLabel26.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel26.setInheritsPopupMenu(false);
-        jLabel26.setMaximumSize(new java.awt.Dimension(999999, 40));
-        jLabel26.setMinimumSize(new java.awt.Dimension(0, 40));
-        jLabel26.setPreferredSize(new java.awt.Dimension(0, 0));
-        pretListe2.add(jLabel26);
-
-        jLabel27.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel27.setText("Jours restants");
-        jLabel27.setToolTipText("");
-        jLabel27.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 1, 0));
-        jLabel27.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel27.setInheritsPopupMenu(false);
-        jLabel27.setMaximumSize(new java.awt.Dimension(999999, 40));
-        jLabel27.setMinimumSize(new java.awt.Dimension(0, 40));
-        jLabel27.setPreferredSize(new java.awt.Dimension(0, 0));
-        pretListe2.add(jLabel27);
+        virementListe.add(jLabel25);
 
         jSeparator23.setForeground(new java.awt.Color(102, 102, 102));
-        pretListe2.add(jSeparator23);
+        virementListe.add(jSeparator23);
 
         jSeparator24.setForeground(new java.awt.Color(102, 102, 102));
-        pretListe2.add(jSeparator24);
+        virementListe.add(jSeparator24);
 
         jSeparator25.setForeground(new java.awt.Color(102, 102, 102));
-        pretListe2.add(jSeparator25);
+        virementListe.add(jSeparator25);
 
         jSeparator26.setForeground(new java.awt.Color(102, 102, 102));
-        pretListe2.add(jSeparator26);
+        virementListe.add(jSeparator26);
 
-        jSeparator27.setForeground(new java.awt.Color(102, 102, 102));
-        pretListe2.add(jSeparator27);
+        clientListeContainer3.setViewportView(virementListe);
 
-        jSeparator28.setForeground(new java.awt.Color(102, 102, 102));
-        pretListe2.add(jSeparator28);
-
-        clientListeContainer3.setViewportView(pretListe2);
-
-        filter2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tout", "Non payé", "Payé une part", "Tout payé" }));
-        filter2.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Nouveau virement");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filter2ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -609,8 +572,8 @@ public class Client extends JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titleLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 661, Short.MAX_VALUE)
-                .addComponent(filter2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 674, Short.MAX_VALUE)
+                .addComponent(jButton2)
                 .addContainerGap())
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
@@ -624,8 +587,8 @@ public class Client extends JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(titleLabel3)
-                    .addComponent(filter2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(127, Short.MAX_VALUE))
+                    .addComponent(jButton2))
+                .addContainerGap(126, Short.MAX_VALUE))
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addGap(46, 46, 46)
@@ -707,9 +670,89 @@ public class Client extends JFrame {
         refresh();
     }//GEN-LAST:event_filterActionPerformed
 
-    private void filter2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filter2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_filter2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JDialog addFrame = new JDialog(this, "Nouveau virement", true);
+
+        addFrame.setSize(400, 300);
+        addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        ClientClass clientClass = new ClientClass();
+        VirementClass virementClass = new VirementClass();
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(0, 1));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        JTextField txtEnvoyeur = new JTextField();
+        JTextField txtBeneficiaire = new JTextField();
+        JTextField txtMontant = new JTextField();
+
+        panel.add(new JLabel("Veuillez remplir les champs"));
+        panel.add(new JLabel("Compte de l'envoyeur:"));
+        panel.add(txtEnvoyeur);
+        panel.add(new JLabel("Compte du bénéficiaire:"));
+        panel.add(txtBeneficiaire);
+        panel.add(new JLabel("Montant (Ar):"));
+        panel.add(txtMontant);
+
+        JButton confirmAddBtn = new JButton("Faire le virement");
+        confirmAddBtn.addActionListener(saveEvt -> {
+            String envoyeur = txtEnvoyeur.getText();
+            String beneficiaire = txtBeneficiaire.getText();
+            int montant = 0;
+
+            if (!clientClass.accountExist(envoyeur) || !clientClass.accountExist(beneficiaire)) {
+                JOptionPane.showMessageDialog(addFrame, "Veullez vérifier les numéros de compte");
+                return;
+            }
+
+            if (envoyeur == null ? beneficiaire == null : envoyeur.equals(beneficiaire)) {
+                JOptionPane.showMessageDialog(addFrame, "Veullez entrer 2 comptes differents");
+                return;
+            }
+
+            try {
+                montant = Integer.parseInt(txtMontant.getText());
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(addFrame, "Veullez entrer un montant valide");
+                return;
+            }
+
+            if (montant <= 0) {
+                JOptionPane.showMessageDialog(addFrame, "Veullez entrer un montant valide");
+                return;
+            }
+
+            int soldeEnv = clientClass.solde(envoyeur);
+            if (soldeEnv < montant) {
+                JOptionPane.showMessageDialog(addFrame, "Le solde de l'envoyeur est insuffisant pour ce transfert");
+                return;
+            }
+
+            //afficher un dialog "Voulez-vous vraiment transfer montant Ar de envoyeur(nomEnvoyeur) à bénéficiaire?
+            int response = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment transfer " + montant + " Ar "
+                    + "de " + envoyeur + "(" + clientClass.nomPrenoms(envoyeur) + ") "
+                    + "à " + beneficiaire + "(" + clientClass.nomPrenoms(beneficiaire) + ")?", "Suppression", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                boolean addSuccess = virementClass.faireVirement(beneficiaire, envoyeur, montant);
+                if (addSuccess) {
+                    JOptionPane.showMessageDialog(addFrame, "Le virement a été fait avec succès");
+
+                    addFrame.dispose();
+
+                    refresh();
+                } else {
+                    JOptionPane.showMessageDialog(addFrame, "Le virement a échoué");
+                }
+            }
+        });
+
+        panel.add(new JLabel());
+        panel.add(confirmAddBtn);
+
+        addFrame.add(panel);
+        addFrame.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public void ListerClients() {
         int nbClient = 0;
@@ -1137,6 +1180,49 @@ public class Client extends JFrame {
         pretListe.repaint();
     }
 
+    public void ListerVirements() {
+        int nbVirement = 0;
+        try {
+            VirementClass virementClass = new VirementClass();
+
+            ResultSet rs;
+
+            rs = virementClass.liste();
+
+            while (rs.next()) {
+                String envoyeur = rs.getString("envoyeur");
+                String beneficiaire = rs.getString("beneficiaire");
+                String montant = rs.getInt("montant") + " Ar";
+                String dateTransfert = rs.getDate("date_transfert").toString();
+
+                JLabel lblEnv = new JLabel(envoyeur);
+                JLabel lblBenef = new JLabel(beneficiaire);
+                JLabel lblMontant = new JLabel(montant);
+                JLabel lblDate = new JLabel(dateTransfert);
+
+                virementListe.add(lblEnv);
+                virementListe.add(lblBenef);
+                virementListe.add(lblMontant);
+                virementListe.add(lblDate);
+
+                nbVirement++;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        while (nbVirement < 22) {
+            for (int i = 0; i < 4; i++) {
+                virementListe.add(new JLabel());
+            }
+            nbVirement++;
+        }
+
+        virementListe.revalidate();
+        virementListe.repaint();
+    }
+
     private String generateRandomNumber(int length) {
         String characters = "0123456789";
         Random random = new Random();
@@ -1147,7 +1233,7 @@ public class Client extends JFrame {
         return accountNumber.toString();
     }
 
-    private void refresh() {
+    public void refresh() {
         int notRemove = 16;
         int componentCount = clientListe.getComponentCount();
 
@@ -1159,7 +1245,8 @@ public class Client extends JFrame {
         clientListe.repaint();
 
         ListerClients();
-
+        
+        notRemove = 16;
         componentCount = pretListe.getComponentCount();
 
         for (int i = componentCount - 1; i >= notRemove; i--) {
@@ -1170,6 +1257,18 @@ public class Client extends JFrame {
         pretListe.repaint();
 
         ListerPrets();
+        
+        notRemove = 8;
+        componentCount = virementListe.getComponentCount();
+
+        for (int i = componentCount - 1; i >= notRemove; i--) {
+            virementListe.remove(i);
+        }
+
+        virementListe.revalidate();
+        virementListe.repaint();
+
+        ListerVirements();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1181,8 +1280,8 @@ public class Client extends JFrame {
     private javax.swing.JScrollPane clientListeContainer3;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JComboBox<String> filter;
-    private javax.swing.JComboBox<String> filter2;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1194,8 +1293,6 @@ public class Client extends JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -1221,8 +1318,6 @@ public class Client extends JFrame {
     private javax.swing.JSeparator jSeparator24;
     private javax.swing.JSeparator jSeparator25;
     private javax.swing.JSeparator jSeparator26;
-    private javax.swing.JSeparator jSeparator27;
-    private javax.swing.JSeparator jSeparator28;
     private javax.swing.JSeparator jSeparator29;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator30;
@@ -1233,11 +1328,11 @@ public class Client extends JFrame {
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel pretListe;
-    private javax.swing.JPanel pretListe2;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchInput;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel titleLabel1;
     private javax.swing.JLabel titleLabel3;
+    private javax.swing.JPanel virementListe;
     // End of variables declaration//GEN-END:variables
 }
