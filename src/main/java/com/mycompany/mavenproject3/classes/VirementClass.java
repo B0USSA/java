@@ -18,11 +18,14 @@ public class VirementClass {
 
     public boolean faireVirement(String beneficiaire, String envoyeur, int montant) {
         Date dateAujourdhui = new java.sql.Date(System.currentTimeMillis());
-        try (Connection conn = DBConnect.getConnection(); PreparedStatement statement = conn.prepareStatement("INSERT INTO virement(envoyeur, beneficiaire, montant, date_transfert) VALUES (?,?,?,?)")) {
+        ClientClass clientClass = new ClientClass(); 
+        try (Connection conn = DBConnect.getConnection(); PreparedStatement statement = conn.prepareStatement("INSERT INTO virement(envoyeur, beneficiaire, nom_env, nom_ben, montant, date_transfert) VALUES (?,?,?,?,?,?)")) {
             statement.setString(1, envoyeur);
             statement.setString(2, beneficiaire);
-            statement.setInt(3, montant);
-            statement.setDate(4, dateAujourdhui);
+            statement.setString(3, clientClass.nomPrenoms(envoyeur));
+            statement.setString(4, clientClass.nomPrenoms(beneficiaire));
+            statement.setInt(5, montant);
+            statement.setDate(6, dateAujourdhui);
 
             int rowsAffected = statement.executeUpdate();
 

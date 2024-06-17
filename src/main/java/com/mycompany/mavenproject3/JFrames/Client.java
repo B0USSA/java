@@ -4,6 +4,11 @@
  */
 package com.mycompany.mavenproject3.JFrames;
 
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.properties.TextAlignment;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -21,6 +26,18 @@ import com.mycompany.mavenproject3.classes.VirementClass;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -603,6 +620,22 @@ public class Client extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    class GMailAuthenticator extends Authenticator {
+
+        String user;
+        String pw;
+
+        public GMailAuthenticator(String username, String password) {
+            super();
+            this.user = username;
+            this.pw = password;
+        }
+
+        public PasswordAuthentication getPasswordAuthentication() {
+            return new PasswordAuthentication(user, pw);
+        }
+    }
+
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         JDialog addFrame = new JDialog(this, "Ajouter un client", true);
 
@@ -729,15 +762,16 @@ public class Client extends JFrame {
                 return;
             }
 
-            //afficher un dialog "Voulez-vous vraiment transfer montant Ar de envoyeur(nomEnvoyeur) à bénéficiaire?
+            String nomEnv = clientClass.nomPrenoms(envoyeur);
+            String nomBen = clientClass.nomPrenoms(beneficiaire);
             int response = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment transfer " + montant + " Ar "
-                    + "de " + envoyeur + "(" + clientClass.nomPrenoms(envoyeur) + ") "
-                    + "à " + beneficiaire + "(" + clientClass.nomPrenoms(beneficiaire) + ")?", "Suppression", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    + "de " + envoyeur + "(" + nomEnv + ") "
+                    + "à " + beneficiaire + "(" + nomBen + ")?", "Suppression", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == JOptionPane.YES_OPTION) {
                 boolean addSuccess = virementClass.faireVirement(beneficiaire, envoyeur, montant);
                 if (addSuccess) {
                     JOptionPane.showMessageDialog(addFrame, "Le virement a été fait avec succès");
-
+                    VirementPDF.generateVirementPDF(envoyeur, soldeEnv, beneficiaire, montant, Integer.parseInt(generateRandomNumber(5)));
                     addFrame.dispose();
 
                     refresh();
@@ -753,6 +787,68 @@ public class Client extends JFrame {
         addFrame.add(panel);
         addFrame.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    void email(String num_pret, String email, int montant_prete) {
+        LocalDate currentDate = LocalDate.now();
+        java.sql.Date datepret = java.sql.Date.valueOf(currentDate);
+
+        notifyClient(num_pret, montant_prete, datepret, email);
+    }
+
+    public class VirementPDF {
+
+        public static void generateVirementPDF(String numCompteEnv, int soldeEnv, String numCompteBen, int montantVirement, int avisNumero) {
+            Date dateTransfert = new java.sql.Date(System.currentTimeMillis());
+
+            ClientClass clientClass = new ClientClass();
+            String pdfPath = "C:/Users/Manda/Documents/javapdf/" + clientClass.nomPrenoms(numCompteEnv) + ".pdf";
+
+            try {
+                PdfWriter writer = new PdfWriter(pdfPath);
+                PdfDocument pdfDoc = new PdfDocument(writer);
+                try (Document document = new Document(pdfDoc)) {
+                    document.add(new Paragraph("Banque Tsika").setTextAlignment(TextAlignment.CENTER));
+
+                    document.add(new Paragraph(" "));
+
+                    // Centre le paragraphe contenant la date de transfert
+                    Paragraph dateTransfertParagraph = new Paragraph("Date : " + dateTransfert.toString());
+                    dateTransfertParagraph.setTextAlignment(TextAlignment.CENTER);
+                    document.add(dateTransfertParagraph);
+
+                    // Centre le paragraphe contenant l'avis de virement
+                    Paragraph avisNumeroParagraph = new Paragraph("AVIS DE VIREMENT N°: " + avisNumero);
+                    avisNumeroParagraph.setTextAlignment(TextAlignment.CENTER);
+                    document.add(avisNumeroParagraph);
+                    document.add(new Paragraph(" "));
+
+                    document.add(new Paragraph("N° de compte : " + numCompteEnv));
+                    document.add(new Paragraph(clientClass.nomPrenoms(numCompteEnv)));
+
+                    document.add(new Paragraph("Solde Actuel : " + soldeEnv + " Ar"));
+                    document.add(new Paragraph(" "));
+
+                    Paragraph aParagraph = new Paragraph("À");
+                    aParagraph.setTextAlignment(TextAlignment.CENTER);
+                    document.add(aParagraph);
+
+                    Paragraph numCompteBenParagraph = new Paragraph("N° de compte : " + numCompteBen);
+                    numCompteBenParagraph.setTextAlignment(TextAlignment.RIGHT);
+                    document.add(numCompteBenParagraph);
+                    Paragraph nomBenParagraph = new Paragraph(clientClass.nomPrenoms(numCompteBen));
+                    nomBenParagraph.setTextAlignment(TextAlignment.RIGHT);
+                    document.add(nomBenParagraph);
+
+                    document.add(new Paragraph(" "));
+                    document.add(new Paragraph("Montant : " + montantVirement + " Ar"));
+                }
+
+                System.out.println("PDF créé avec succès : " + pdfPath);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public void ListerClients() {
         int nbClient = 0;
@@ -954,6 +1050,7 @@ public class Client extends JFrame {
                                 loanFrame.dispose();
 
                                 refresh();
+                                email(numPret, mail, montant);
                             } else {
                                 JOptionPane.showMessageDialog(loanFrame, "Prêt échoué");
                             }
@@ -988,6 +1085,62 @@ public class Client extends JFrame {
                 clientListe.add(new JLabel());
             }
             nbClient++;
+        }
+    }
+
+    public void notifyClient(String num_pret, int montant_prete, java.sql.Date datepret, String email) {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate dueDate = currentDate.plusMonths(6);
+        long daysRemaining = ChronoUnit.DAYS.between(currentDate, dueDate);
+        int montantARendre = montant_prete + montant_prete / 10;
+
+        String subject = "Détails de votre prêt";
+        String body = "Bonjour " + email + ",\n\n"
+                + "Nous vous informons que votre prêt a été enregistré avec succès. Voici les détails de votre prêt :\n\n"
+                + "Numéro de prêt : " + num_pret + "\n"
+                + "Montant prêté : " + montant_prete + " Ar\n"
+                + "Montant à rendre : " + montantARendre + " Ar\n"
+                + "Date du prêt : " + datepret.toString() + "\n"
+                + "Nombre de jours restants pour rembourser le prêt : " + daysRemaining + " jours\n\n"
+                + "Merci de faire confiance à notre service.\n\n"
+                + "Cordialement,\n"
+                + "Banque Tsika";
+        try {
+            sendEmail(subject, body, email, null);
+            JOptionPane.showMessageDialog(null, "Email de notification de prêt envoyé à " + email);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Échec de l'envoi de l'email de notification.");
+        }
+    }
+
+    public void sendEmail(String subject, String text, String destinataire, String copyDest) throws MessagingException {
+        // 1 -> Création de la session
+        Properties properties = new Properties();
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.port", "587");
+
+        final String username = "schoolprojectmail000@gmail.com";
+        final String password = "ozyf sxes asij fzaz";
+
+        Session session;
+        session = Session.getInstance(properties, new GMailAuthenticator(username, password));
+
+        // 2 -> Création du message
+        MimeMessage message = new MimeMessage(session);
+        message.setText(text);
+        message.setSubject(subject);
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinataire));
+        if (copyDest != null) {
+            message.addRecipient(Message.RecipientType.CC, new InternetAddress(copyDest));
+        }
+
+        try ( // 3 -> Envoi du message
+                Transport transport = session.getTransport("smtp")) {
+            transport.connect();
+            transport.sendMessage(message, message.getAllRecipients());
         }
     }
 
@@ -1190,8 +1343,8 @@ public class Client extends JFrame {
             rs = virementClass.liste();
 
             while (rs.next()) {
-                String envoyeur = rs.getString("envoyeur");
-                String beneficiaire = rs.getString("beneficiaire");
+                String envoyeur = rs.getString("envoyeur") + "(" + rs.getString("nom_env") + ")";
+                String beneficiaire = rs.getString("beneficiaire") + "(" + rs.getString("nom_ben") + ")";
                 String montant = rs.getInt("montant") + " Ar";
                 String dateTransfert = rs.getDate("date_transfert").toString();
 
@@ -1245,7 +1398,7 @@ public class Client extends JFrame {
         clientListe.repaint();
 
         ListerClients();
-        
+
         notRemove = 16;
         componentCount = pretListe.getComponentCount();
 
@@ -1257,7 +1410,7 @@ public class Client extends JFrame {
         pretListe.repaint();
 
         ListerPrets();
-        
+
         notRemove = 8;
         componentCount = virementListe.getComponentCount();
 
